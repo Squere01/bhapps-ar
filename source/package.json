@@ -1,0 +1,12 @@
+{
+  "name": "bhapps-ar-source",
+  "private": true,
+  "scripts": {
+    "build": "esbuild src/ar-app.js --bundle --minify --format=iife --target=es2020 --outfile=../app.js"
+  },
+  "devDependencies": {
+    "@mediapipe/tasks-vision": "0.10.14",
+    "esbuild": "0.24.0",
+    "three": "0.170.0"
+  }
+}
