@@ -112,6 +112,17 @@
   .actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
   .actions button { min-height: 48px; padding: 0 20px; border-radius: 12px; border: 1px solid var(--line); background: var(--glass); cursor: pointer; font-weight: 600; }
   .actions .primary { background: var(--ink); color: var(--deep); border-color: transparent; }
+  .lens {
+    position: fixed; left: 50%; transform: translateX(-50%); z-index: 3;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 112px);
+    display: flex; gap: 4px; padding: 4px; border-radius: 999px;
+    background: var(--glass); border: 1px solid var(--line); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  }
+  .lens button {
+    min-width: 48px; height: 44px; padding: 0 10px; border-radius: 999px; border: 0; cursor: pointer;
+    background: transparent; color: var(--ink-soft); font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums;
+  }
+  .lens button[aria-pressed="true"] { background: rgba(255, 255, 255, 0.16); color: #ffd36b; }
   @media (prefers-reduced-motion: reduce) { #shutter::after { transition: none; } }
 </style>
 </head>
@@ -134,6 +145,11 @@
     <rect x="62" y="150" width="62" height="18" rx="6" stroke="#e0484e"></rect>
   </svg>
   <p>Arahkan kamera ke pergelangan tangan, punggung tangan menghadap kamera.</p>
+</div>
+
+<div class="lens" id="lensRow" role="group" aria-label="Lensa kamera" hidden>
+  <button id="lens05" type="button" aria-pressed="false" aria-label="Lensa ultra wide 0,5 kali">0,5×</button>
+  <button id="lens1" type="button" aria-pressed="true" aria-label="Lensa utama 1 kali">1×</button>
 </div>
 
 <nav class="bar" aria-label="Kontrol AR">
