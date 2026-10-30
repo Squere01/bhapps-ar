@@ -109,6 +109,8 @@
     background: rgba(2, 8, 22, 0.92);
   }
   #photo { max-width: 100%; max-height: 72vh; border-radius: 14px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+  .hint { margin: 0; max-width: 320px; text-align: center; font-size: 13px; line-height: 1.5; color: var(--ink-soft); }
+  .hint b { color: var(--ink); }
   .actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
   .actions button { min-height: 48px; padding: 0 20px; border-radius: 12px; border: 1px solid var(--line); background: var(--glass); cursor: pointer; font-weight: 600; }
   .actions .primary { background: var(--ink); color: var(--deep); border-color: transparent; }
@@ -187,9 +189,10 @@
 
 <section id="sheet" hidden aria-label="Hasil foto">
   <img id="photo" alt="">
+  <p id="saveHint" class="hint" hidden>Pilih <b>Simpan Gambar</b> di menu yang muncul. Foto langsung masuk ke galeri.</p>
   <div class="actions">
-    <button id="save" class="primary" type="button">Simpan foto</button>
-    <button id="share" type="button" hidden>Bagikan</button>
+    <button id="save" class="primary" type="button">Simpan ke Galeri</button>
+    <button id="share" type="button" hidden>Unduh file</button>
     <button id="close" type="button">Kembali ke kamera</button>
   </div>
 </section>
