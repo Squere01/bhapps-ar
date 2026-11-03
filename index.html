@@ -99,10 +99,12 @@
   #start > * { width: 100%; max-width: 440px; margin-left: auto; margin-right: auto; }
   .start-head { display: flex; align-items: center; height: 40px; }
   .start-head .mark { font-size: 15px; }
-  .start-band { flex: 1 1 auto; min-height: 150px; display: flex; align-items: center; justify-content: center; position: relative; }
+  /* tinggi tetap (tidak menyusut) supaya gelang tidak menimpa teks di HP berlayar pendek; sisa ruang jadi jarak */
+  .start-band { flex: none; height: clamp(160px, 28vh, 260px); margin: 12px auto 28px; display: flex; align-items: center; justify-content: center; position: relative; }
+  #start .spacer { flex: 1 1 0; min-height: 0; }
   .start-band::before { content: ""; position: absolute; width: 62%; aspect-ratio: 1; border-radius: 50%;
     background: radial-gradient(circle, rgba(36, 96, 168, .14) 0%, rgba(36, 96, 168, 0) 70%); }
-  .start-band img { position: relative; width: min(62vw, 250px); max-height: 34vh; object-fit: contain; animation: float 6s ease-in-out infinite; }
+  .start-band img { position: relative; height: 100%; width: auto; aspect-ratio: 1; object-fit: contain; animation: float 6s ease-in-out infinite; }
   @keyframes float { 50% { transform: translateY(-6px); } }
   #start .eyebrow { margin: 0 auto 10px; font-size: 12px; font-weight: 500; color: var(--blue); }
   #start h1 { margin: 0 auto; font-size: clamp(28px, 7.4vw, 38px); font-weight: 300; line-height: 1.18; letter-spacing: -0.01em; text-wrap: balance; }
@@ -178,6 +180,7 @@
 
 <section id="start">
   <div class="start-head"><span class="mark">BHAPPS</span></div>
+  <div class="spacer"></div>
   <div class="start-band"><img src="img/band-performance-34.webp" alt="Gelang BHAPPS edisi Performance"></div>
   <p class="eyebrow">Coba di pergelangan · Performance Edition</p>
   <h1>Lihat BHAPPS di tangan Anda<em>.</em></h1>
