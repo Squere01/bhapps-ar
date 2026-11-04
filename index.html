@@ -99,13 +99,10 @@
   #start > * { width: 100%; max-width: 440px; margin-left: auto; margin-right: auto; }
   .start-head { display: flex; align-items: center; height: 40px; }
   .start-head .mark { font-size: 15px; }
-  /* tinggi tetap (tidak menyusut) supaya gelang tidak menimpa teks di HP berlayar pendek; sisa ruang jadi jarak */
-  .start-band { flex: none; height: clamp(160px, 28vh, 260px); margin: 12px auto 28px; display: flex; align-items: center; justify-content: center; position: relative; }
-  #start .spacer { flex: 1 1 0; min-height: 0; }
-  .start-band::before { content: ""; position: absolute; width: 62%; aspect-ratio: 1; border-radius: 50%;
-    background: radial-gradient(circle, rgba(36, 96, 168, .14) 0%, rgba(36, 96, 168, 0) 70%); }
-  .start-band img { position: relative; height: 100%; width: auto; aspect-ratio: 1; object-fit: contain; animation: float 6s ease-in-out infinite; }
-  @keyframes float { 50% { transform: translateY(-6px); } }
+  /* film 9:16, dibatasi tinggi layar supaya bagian coba AR tetap terlihat di bawahnya */
+  .film { flex: none; margin: 18px auto 32px; }
+  .film video { display: block; width: min(100%, calc(70vh * 9 / 16)); aspect-ratio: 9 / 16; margin: 0 auto; background: var(--text); object-fit: cover; }
+  .film p { margin: 10px 0 0; text-align: center; font-size: 11px; color: var(--text-3); }
   #start .eyebrow { margin: 0 auto 10px; font-size: 12px; font-weight: 500; color: var(--blue); }
   #start h1 { margin: 0 auto; font-size: clamp(28px, 7.4vw, 38px); font-weight: 300; line-height: 1.18; letter-spacing: -0.01em; text-wrap: balance; }
   #start h1 em { font-style: normal; color: var(--red); }
@@ -130,7 +127,7 @@
   .actions { display: flex; flex-wrap: wrap; gap: 2px; justify-content: center; width: 100%; max-width: 440px; }
   .actions button { flex: 1 1 140px; min-height: 48px; padding: 0 18px; border: 1px solid var(--text); background: transparent; cursor: pointer; font-size: 13px; font-weight: 500; }
   .actions .primary { flex-basis: 100%; background: var(--text); color: var(--white); }
-  @media (prefers-reduced-motion: reduce) { #shutter::after { transition: none; } .start-band img { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { #shutter::after { transition: none; } }
 </style>
 </head>
 <body>
@@ -180,9 +177,11 @@
 
 <section id="start">
   <div class="start-head"><span class="mark">BHAPPS</span></div>
-  <div class="spacer"></div>
-  <div class="start-band"><img src="img/band-performance-34.webp" alt="Gelang BHAPPS edisi Performance"></div>
-  <p class="eyebrow">Coba di pergelangan · Performance Edition</p>
+  <div class="film">
+    <video id="film" controls playsinline preload="metadata" poster="media/poster-9x16.jpg" src="media/bhapps-film-s10-9x16.mp4" aria-label="Film BHAPPS"></video>
+    <p>Nyalakan suara untuk pengalaman terbaik.</p>
+  </div>
+  <p class="eyebrow" id="step2">Coba di pergelangan · Performance Edition</p>
   <h1>Lihat BHAPPS di tangan Anda<em>.</em></h1>
   <p class="lede">Gelang muncul otomatis begitu kamera menemukan pergelangan tangan Anda.</p>
   <ol>
@@ -206,5 +205,15 @@
 </section>
 
 <script src="./app.js"></script>
+<script>
+  // film berhenti saat kamera dimulai; selesai menonton langsung diarahkan ke bagian coba AR
+  (function () {
+    var film = document.getElementById("film");
+    document.getElementById("startBtn").addEventListener("click", function () { film.pause(); });
+    film.addEventListener("ended", function () {
+      document.getElementById("step2").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  })();
+</script>
 </body>
 </html>
